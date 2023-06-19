@@ -204,6 +204,28 @@
 
         .chat{
             flex: 2;
+
+            .chat-info {
+                height: 50px;
+                background-color: #5d5d8d;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 10px;
+                color: lightgray;
+                box-shadow:  2px 0px 5px 0px #000;
+            }
+
+            .chat-icons{
+                display: flex;
+                gap: 10px;
+
+                font-size: 12px;
+
+                svg:hover{
+                    color: white;
+                }
+            }
         }
     }
 

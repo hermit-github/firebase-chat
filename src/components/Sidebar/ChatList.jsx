@@ -2,7 +2,7 @@ import React from "react";
 
 const ChatList = () => {
   return (
-    <div className="chats">
+    <div className="chat-list">
       <div className="user-chat">
         <img
           alt="user img"
