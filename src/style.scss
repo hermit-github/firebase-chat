@@ -44,6 +44,7 @@
                 border: none;
                 width: 250px;
                 border-bottom: 1px solid #a7bcff;
+                outline: none;
                 &::placeholder{
                     color: rgb(175,175,175);
                 }
@@ -141,6 +142,63 @@
                         cursor: pointer;
                     }
                 }
+            }
+
+            .search{
+                border-bottom: 1px solid grey;
+
+                .search-form{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 5px 5px;
+
+                    input {
+                        background-color: transparent;
+                        border: none;
+                        color: white;
+                        width: 90%;
+                        outline: none;
+                        
+                        &::placeholder{
+                            color: lightgray;
+                        }
+                    }
+                }
+            }
+
+            .user-chat{
+                display: flex;
+                justify-content: left;               
+                align-items: center;
+                padding: 10px;
+                gap: 10px;
+                cursor: pointer;
+
+                &:hover{
+                    background-color: #2f2d52;
+                }
+
+                img{
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+
+                .user-chat-info{
+                    span{
+                        color: white;
+                        font-size: 18px;
+                        font-weight: 500;
+                    }
+                    p{
+                        color: lightgray;
+                        font-size: 12px;
+                    }
+
+                }
+                
             }
         }
 
