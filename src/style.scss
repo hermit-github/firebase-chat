@@ -233,12 +233,97 @@
                 background-color: #ddddf7;
                 padding: 10px;
                 height: calc(100% - 100px);
+                overflow-y: scroll;
+
+                .message{
+                    display: flex;
+                    gap: 10px;
+                    margin-bottom: 20px;
+                    
+
+                    .message-info{
+                        display: flex;
+                        flex-direction: column;
+                        color: gray;
+                        font-size: 10px;
+                        font-weight: 300;
+
+                        img{
+                            height: 40px;
+                            width: 40px;
+                            border-radius: 50%;
+                            object-fit: cover;
+                        }
+                    }
+                    .message-content{
+                        max-width: 80%;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 10px;
+
+                        p{
+                            background-color: #fff;
+                            padding: 10px 20px;
+                            border-radius: 0 10px 10px 10px;
+                            max-width: max-content;
+                        }
+
+
+                        img{
+                            // display: none;
+                            width: 50%;
+                        }
+                    }
+
+                    &.owner{
+                        flex-direction: row-reverse;
+
+                        .message-content{
+                            align-items: flex-end;
+                            p{
+                                background-color: #8da4f1;
+                                color: white;
+                                border-radius: 10px 0px 10px 10px;
+                            }
+
+                        }
+                        
+                    }
+                }
             }
 
             .input{
                 height: 50px;
                 background-color: #fff;
                 padding: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                input{
+                    border: none;
+                    outline: none;
+                    font-size: 18px;
+                    color: #2f2d52;
+
+                    &::placeholder{
+                        color: lightgray;
+                    }
+                }
+
+                .send{
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+
+                    svg{
+                        cursor: pointer;
+
+                        &:hover{
+                            color: blue;
+                        }
+                    }
+                }
             }
         }
     }

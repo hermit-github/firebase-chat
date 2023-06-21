@@ -1,13 +1,13 @@
 import React from 'react'
-import Messages from './Messages'
+import Message from './Messages'
 
 const ChatArea = () => {
   return (
     <div className='messages'>
-        <Messages/>
-        <Messages/>
-        <Messages/>
-        <Messages/>     
+        <Message/>
+        <Message/>
+        <Message/>
+        <Message/>     
     </div>
   )
 }
