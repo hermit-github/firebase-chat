@@ -214,17 +214,31 @@
                 padding: 10px;
                 color: lightgray;
                 box-shadow:  2px 0px 5px 0px #000;
+
+                .chat-icons{
+                    display: flex;
+                    gap: 10px;
+    
+                    font-size: 12px;
+    
+                    svg:hover{
+                        color: white;
+                    }
+                }
             }
 
-            .chat-icons{
-                display: flex;
-                gap: 10px;
+            
 
-                font-size: 12px;
+            .messages{
+                background-color: #ddddf7;
+                padding: 10px;
+                height: calc(100% - 100px);
+            }
 
-                svg:hover{
-                    color: white;
-                }
+            .input{
+                height: 50px;
+                background-color: #fff;
+                padding: 10px;
             }
         }
     }

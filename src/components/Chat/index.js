@@ -1,5 +1,7 @@
 import React from 'react'
 import { VideoCameraFilled,PhoneFilled,ProfileFilled } from '@ant-design/icons'
+import ChatArea from './ChatArea'
+import Chatbox from './Chatbox'
 
 const Chat = () => {
   return (
@@ -12,6 +14,8 @@ const Chat = () => {
           <ProfileFilled />
         </div>
       </div>
+      <ChatArea/>
+      <Chatbox/>
     </div>
   )
 }
