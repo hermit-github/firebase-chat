@@ -1,3 +1,21 @@
+@mixin mobile{
+    @media screen and (max-width:480px) {
+        @content
+    }
+}
+
+@mixin tablet{
+    @media screen and (max-width:768px) {
+        @content
+    }
+}
+
+@mixin laptop {
+    @media screen and (max-width:1200px) {
+        @content
+    }
+}
+
 
 .form-container{
     background-color: #a7bcff;
@@ -99,7 +117,7 @@
     .container{
         border: 1px solid white;
         border-radius: 10px;
-        height: 65%;
+        height: 85%;
         width: 80%;
         display: flex;
         overflow: hidden;
@@ -119,6 +137,13 @@
 
                 .logo{
                     font-weight: bold;
+
+                    @include tablet{
+                        display: none;
+                    }
+                }
+                @include tablet{
+                    justify-content: center;
                 }
 
                 .user{
@@ -126,20 +151,34 @@
                     align-items: center;
                     gap: 10px;
 
+                    
+
                     img{
                         background-color: #ddddf7;
                         height: 24px;
                         width: 24px;
                         border-radius: 50%;
                         object-fit: cover;
+
+
                     }
 
                     button{
                         background-color: #5d5d8d;
-                        color: #ddddf7;
+                        color: lightgrey;
                         font-size: 10px;
                         border: none;
                         cursor: pointer;
+                        &:hover{
+                            color: #fff;
+                        }
+                    }
+
+                    .logout{
+                        color: lightgrey;
+                        &:hover{
+                            color: #fff;
+                        }
                     }
                 }
             }
