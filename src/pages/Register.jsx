@@ -1,57 +1,83 @@
-import React from 'react'
-import Add from "../images/addAvatar.png"
+import React, { useState } from "react";
+import Add from "../images/addAvatar.png";
 
-import { createUserWithEmailAndPassword } from 'firebase/auth'
-import { auth } from '../firebase'
+import { createUserWithEmailAndPassword,updateProfile } from "firebase/auth";
+import { auth, db, storage } from "../firebase";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import {doc,setDoc} from "firebase/firestore"
 
 const Register = () => {
+  const [err, setErr] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // const displayName = e.target[0].value
-    const email = e.target[1].value
-    const password = e.target[2].value
-    // const file = e.target[3].files[0]
+    const displayName = e.target[0].value
+    const email = e.target[1].value;
+    const password = e.target[2].value;
+    const file = e.target[3].files[0]
 
+    try {
+      const res = await createUserWithEmailAndPassword(auth, email, password);
 
-    createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      // Signed in 
-      const user = userCredential.user;
-      console.log(user);
-      // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
+      const storageRef = await ref(storage, displayName);
 
-      console.log(errorCode, errorMessage);
-      // ..
-    });
-  }
+      const uploadTask = await uploadBytesResumable(storageRef, file);
+
+      uploadTask.on(
+        
+        (error) => {
+          // Handle unsuccessful uploads
+          setErr(true)
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then( async (downloadURL) => {
+            await updateProfile(res.user,{
+              displayName,
+              photoURL: downloadURL
+            })
+
+            await setDoc(doc(db,"users",res.user.uid),{
+              uid: res.user.uid,
+              displayName,
+              email,
+              photoURL:downloadURL
+            })
+  
+            console.log("File available at", downloadURL);
+          });
+        }
+      );
+
+      
+    } catch (error) {
+      setErr(true);
+    }
+  };
 
   return (
-    <div className='form-container'>
-      <div className='form-wrapper'>
-        <div className='form-header'>
-          <span className='title'>H3RMIT Chat</span>
-          <span className='logo'>Register</span>
+    <div className="form-container">
+      <div className="form-wrapper">
+        <div className="form-header">
+          <span className="title">H3RMIT Chat</span>
+          <span className="logo">Register</span>
         </div>
-          <form className='register-from' onSubmit={handleSubmit}>
-            <input type='text' placeholder='Display Name'/>
-            <input type='email' placeholder='Input Email'/>
-            <input type='password' placeholder='Input Password'/>
-            <input  style={{display:'none'}} type='file' id='file' />
-            <label htmlFor='file'>
-              <img src={Add} alt='Add Avatar'/>
-              <span>Add avatar</span>
-            </label>
-            <button className='register-button'>Sign up</button>
-          </form>
-          <p>You do have an account? Login</p>
+        <form className="register-from" onSubmit={handleSubmit}>
+          <input type="text" placeholder="Display Name" />
+          <input type="email" placeholder="Input Email" />
+          <input type="password" placeholder="Input Password" />
+          <input style={{ display: "none" }} type="file" id="file" />
+          <label htmlFor="file">
+            <img src={Add} alt="Add Avatar" />
+            <span>Add avatar</span>
+          </label>
+          <button className="register-button">Sign up</button>
+          {err && <span>Something went wrong!</span>}
+        </form>
+
+        <p>You do have an account? Login</p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;
